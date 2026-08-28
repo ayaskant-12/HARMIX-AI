@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HARMIX AI | Performance Engineering</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+    <div class="app-container">
+
+        <!-- ===========================
+             Sidebar
+        ============================ -->
+        <nav class="sidebar">
+
+            <div class="logo">
+                HARMIX <span>AI</span>
+            </div>
+
+            <ul class="nav-links">
+
+                <li class="active" onclick="showTab('dashboard')">
+                    Dashboard
+                </li>
+
+                <li onclick="showTab('upload')">
+                    Upload HAR
+                </li>
+
+                <li onclick="showTab('analysis')">
+                    AI Analysis
+                </li>
+
+                <li onclick="showTab('chat')">
+                    AI Chat
+                </li>
+
+            </ul>
+
+        </nav>
+
+        <!-- ===========================
+             Main Content
+        ============================ -->
+
+        <main class="main-content">
+
+            <header>
+                <h2>AI-Powered Performance Engineering</h2>
+            </header>
+
+            <!-- ===========================
+                 Dashboard
+            ============================ -->
+
+            <section id="dashboard" class="tab-content active">
+
+                <div class="stats-grid">
+
+                    <div class="stat-card glass">
+                        <h3>Total APIs</h3>
+                        <p id="total-apis">0</p>
+                    </div>
+
+                    <div class="stat-card glass">
+                        <h3>Correlation Candidates</h3>
+                        <p id="corr-candidates">0</p>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- ===========================
+                 Upload HAR
+            ============================ -->
+
+            <section id="upload" class="tab-content">
+
+                <div class="upload-container glass">
+
+                    <h3>Upload HAR File</h3>
+
+                    <input
+                        type="file"
+                        id="harFileInput"
+                        accept=".har">
+
+                    <br><br>
+
+                    <button
+                        onclick="uploadFile()"
+                        class="btn-primary">
+
+                        Process File
+
+                    </button>
+
+                    <div
+                        id="loading"
+                        style="display:none; margin-top:20px;">
+
+                        Processing via AI...
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- ===========================
+                 AI Analysis
+            ============================ -->
+
+            <section id="analysis" class="tab-content">
+
+                <div class="glass">
+
+                    <h3>AI Performance Analysis</h3>
+
+                    <div
+                        id="ai-summary-content"
+                        style="
+                            white-space: pre-wrap;
+                            line-height: 1.7;
+                            color:#ddd;
+                            min-height:300px;
+                        ">
+
+                        Upload a HAR file to see the AI executive
+                        summary, authentication analysis,
+                        business flow,
+                        performance risks,
+                        scalability observations,
+                        and recommendations.
+
+                    </div>
+
+                    <br>
+
+                    <button
+                        id="btn-download-pdf"
+                        class="btn-primary"
+                        style="display:none;"
+                        onclick="downloadPDF()">
+
+                        Download PDF Report
+
+                    </button>
+
+                    <button
+                        id="btn-download-jmx"
+                        class="btn-primary"
+                        style="display:none; margin-left:15px;"
+                        onclick="downloadJMX()">
+
+                        Download JMX Test Plan
+
+                    </button>
+
+                </div>
+
+            </section>
+
+            <!-- ===========================
+                 AI Chat
+            ============================ -->
+
+            <section id="chat" class="tab-content">
+
+                <div
+                    class="chat-container glass"
+                    style="
+                        display:flex;
+                        flex-direction:column;
+                        height:75vh;
+                    ">
+
+                    <h3>Chat with your HAR File</h3>
+
+                    <div
+                        id="chat-window"
+                        style="
+                            flex:1;
+                            overflow-y:auto;
+                            padding:15px;
+                            border:1px solid rgba(255,255,255,.15);
+                            border-radius:10px;
+                            background:rgba(0,0,0,.2);
+                            margin-bottom:20px;
+                        ">
+
+                        <div
+                            class="chat-msg system-msg"
+                            style="color:#00d4ff;">
+
+                            <strong>System</strong><br><br>
+
+                            Upload a HAR file first.
+
+                            Then ask questions like:
+
+                            <br><br>
+
+                            • Which APIs require authentication?
+
+                            <br>
+
+                            • Which requests need correlation?
+
+                            <br>
+
+                            • Show all POST APIs
+
+                            <br>
+
+                            • Which APIs return JSON?
+
+                            <br>
+
+                            • Suggest parameterization
+
+                            <br>
+
+                            • Recommend JMeter Assertions
+
+                            <br>
+
+                            • Recommend Timers
+
+                            <br>
+
+                            • Generate a load testing strategy
+
+                        </div>
+
+                    </div>
+
+                    <div
+                        style="
+                            display:flex;
+                            gap:10px;
+                        ">
+
+                        <input
+                            type="text"
+                            id="chat-input"
+                            placeholder="Ask anything about your HAR..."
+                            style="
+                                flex:1;
+                                padding:12px;
+                                border-radius:8px;
+                                border:none;
+                                background:rgba(255,255,255,.08);
+                                color:white;
+                            "
+                            onkeypress="if(event.key==='Enter') sendChatMessage();">
+
+                        <button
+                            onclick="sendChatMessage()"
+                            class="btn-primary">
+
+                            Send
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <script src="js/app.js"></script>
+
+</body>
+
+</html>
